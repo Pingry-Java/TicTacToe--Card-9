@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * @author MIROSLAV BERGAM, JEREMY NEWMAN, GRAHAM MATTHEWS, TOM DRZIK
  *
@@ -6,7 +8,32 @@
 public class TicTacToe
 {
 
+
 	public static void main(String[] args){
+
+	
+	public static void main(String[] args)
+	{
+		Scanner keys = new Scanner(System.in);
+		boolean win = false;
+		System.out.println("Hello! Welcome to tic tac toe! ");
+		System.out.println("What would you like the size of the board to be?: ");
+		int size = keys.nextLine();
+		String[][] grid = init(size);
+		printGrid(grid);
+		int i=1;
+		String place;
+		while((win==false)&&i<10){
+			System.out.println("Where do you want to place your character?");
+			place=keys.nextLine();
+			addSymbol(place, grid, size, i);
+			i++;
+			win=checkWinner(grid);
+		}
+		
+		
+		
+
 	 
 	}
 	
@@ -17,14 +44,14 @@ public class TicTacToe
 	* @return Returns the initialized array
 	*/
 	public static String[][] init(int size){
-	 String[][] grid = new String[size][size];
-	 int counter = 1; 
-	 for (int i = 0; i < size; i++){
-	  for (int n = 0; n < size; n++){
-	   grid[i][n] = Integer.toString(counter);
-	   counter++; 
-	  }
-	 }
+		String[][] grid = new String[size][size];
+		int counter = 1; 
+		for (int i = 0; i < size; i++){
+		for (int n = 0; n < size; n++){
+		grid[i][n] = Integer.toString(counter);
+		counter++; 
+		}
+	}
 	 return grid; 
 	}
 	
@@ -55,10 +82,21 @@ public class TicTacToe
 	 return win; 
 	}
 	
+	public static void addSymbol(int place, String[][]grid, int size, int turn){
+		String symbol;
+		if(turn%2==1){
+			symbol="X";
+		}
+		else{
+			symbol="O";
+		}
+		grid[(place-1)/size][(place-1)%size]=symbol;
+		return grid;
+	}
+	
 	/**
-	 *
-	 *
-	 *
+	 *@param grid the current grid
+	 *@return whether there is a diagonal victory going from (0,0) to (2,2)
 	*/
 	public static boolean checkDiag(String[][] grid){
 	 String firstSymbol = grid[0][0];
@@ -70,8 +108,8 @@ public class TicTacToe
 	}
 	
 	/**
-	 *
-	 *
+	 *@param grid the current grid
+	 *@return whether there is a diagonal victory from (0,2) to (2,0)
 	 *
 	*/
 	public static boolean checkReverseDiag(String[][] grid){
@@ -86,10 +124,8 @@ public class TicTacToe
 	}
 	
 	/**
-	 *
-	 *
-	 *
-	 *
+	 *@param grid the current grid
+	 *@return whether or not there is a verticle victory
 	*/
 	public static boolean checkVert(String[][] grid){
 		int sum = 0; 
