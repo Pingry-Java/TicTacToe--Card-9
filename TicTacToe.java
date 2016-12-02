@@ -90,9 +90,8 @@ public class TicTacToe
 	}
 	
 	/**
-	 *
-	 *
-	 *
+	 *@param grid the current grid
+	 *@return whether there is a diagonal victory going from (0,0) to (2,2)
 	*/
 	public static boolean checkDiag(String[][] grid){
 	 String firstSymbol = grid[0][0];
@@ -104,8 +103,8 @@ public class TicTacToe
 	}
 	
 	/**
-	 *
-	 *
+	 *@param grid the current grid
+	 *@return whether there is a diagonal victory from (0,2) to (2,0)
 	 *
 	*/
 	public static boolean checkReverseDiag(String[][] grid){
@@ -120,10 +119,8 @@ public class TicTacToe
 	}
 	
 	/**
-	 *
-	 *
-	 *
-	 *
+	 *@param grid the current grid
+	 *@return whether or not there is a verticle victory
 	*/
 	public static boolean checkVert(String[][] grid){
 		int sum = 0; 
@@ -141,10 +138,9 @@ public class TicTacToe
 	}
 	
 	/**
-	 *
-	 *
-	 *
-	 *
+	 * This method checks if a player has won in the horizontal row.
+	 * @param grid The String array that holds the current board
+	 * @return Returns true or false, true if a player has won, false if a player has not
 	*/
 	public static boolean checkHoriz(String[][] grid){
 		int sum = 0; 
