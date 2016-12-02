@@ -1,11 +1,11 @@
 /**
- * @author MICHAEL SUN, DREW BECKMEN, LINDSEY YU 
+ * @author MIROSLAV BERGAM, JEREMY NEWMAN, GRAHAM MATTHEWS, TOM DRZIK
  *
  *
  */
 public class TicTacToe
 {
-	
+
 	public static void main(String[] args){
 	 
 	}
