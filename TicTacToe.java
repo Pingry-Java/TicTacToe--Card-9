@@ -14,7 +14,8 @@ public class TicTacToe
 		boolean win = false;
 		System.out.println("Hello! Welcome to tic tac toe! ");
 		System.out.println("What would you like the size of the board to be?: ");
-		int size = keys.nextLine();
+		int size = keys.nextInt();
+		keys.nextLine();
 		String[][] grid = init(size);
 		printGrid(grid);
 		int i=1;
@@ -25,6 +26,13 @@ public class TicTacToe
 			addSymbol(place, grid, size, i);
 			i++;
 			win=checkWinner(grid);
+			printGrid(grid);
+		}
+		if(i%2==0){
+			System.out.println("Congratulations Player 1! You won!");
+		}
+		else{
+			System.out.println("Congratulations Player 2! You won!");
 		}
 		
 		
@@ -70,23 +78,23 @@ public class TicTacToe
 	*/
 	public static boolean checkWinner(String[][] array){
 	 boolean win; 
-	 if (checkDiag(array) == true || checkReverseDiag(array) == true || checkVert(array) == true || checkHoriz(array) == true)
+	 if (checkDiag(array) == true || checkReverseDiagonal(array) == true || checkVert(array) == true || checkHoriz(array) == true)
 	 	win = true; 
 	 else
 	 	win = false; 
 	 return win; 
 	}
 	
-	public static void addSymbol(int place, String[][]grid, int size, int turn){
+	public static void addSymbol(String place, String[][]grid, int size, int turn){
 		String symbol;
+		int spot=Integer.parseInt(place);
 		if(turn%2==1){
 			symbol="X";
 		}
 		else{
 			symbol="O";
 		}
-		grid[(place-1)/size][(place-1)%size]=symbol;
-		return grid;
+		grid[(spot-1)/size][(spot-1)%size]=symbol;
 	}
 	
 	/**
@@ -113,6 +121,17 @@ public class TicTacToe
 		for (int i = gridLength - 2; i >= 0; i--)
 		{
 			if (!(grid[i][i]).equals(firstSymbol))
+				return false; 
+		}
+		return true; 
+	}
+	
+	public static boolean checkReverseDiagonal(String[][] grid){
+		int gridLength = grid.length;
+		String firstSymbol = grid[0][gridLength - 1];
+		for (int i = gridLength - 2; i >= 0; i--)
+		{
+			if (!(grid[gridLength-i][i]).equals(firstSymbol))
 				return false; 
 		}
 		return true; 
