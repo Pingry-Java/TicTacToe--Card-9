@@ -104,10 +104,9 @@ public class TicTacToe
 	}
 	
 	/**
-	 *
-	 *
-	 *
-	 *
+	 * This method checks if a player has won in the horizontal row.
+	 * @param grid The String array that holds the current board
+	 * @return Returns true or false, true if a player has won, false if a player has not
 	*/
 	public static boolean checkHoriz(String[][] grid){
 		int sum = 0; 
