@@ -56,9 +56,8 @@ public class TicTacToe
 	}
 	
 	/**
-	 *
-	 *
-	 *
+	 *@param grid the current grid
+	 *@return whether there is a diagonal victory going from (0,0) to (2,2)
 	*/
 	public static boolean checkDiag(String[][] grid){
 	 String firstSymbol = grid[0][0];
@@ -70,8 +69,8 @@ public class TicTacToe
 	}
 	
 	/**
-	 *
-	 *
+	 *@param grid the current grid
+	 *@return whether there is a diagonal victory from (0,2) to (2,0)
 	 *
 	*/
 	public static boolean checkReverseDiag(String[][] grid){
@@ -86,10 +85,8 @@ public class TicTacToe
 	}
 	
 	/**
-	 *
-	 *
-	 *
-	 *
+	 *@param grid the current grid
+	 *@return whether or not there is a verticle victory
 	*/
 	public static boolean checkVert(String[][] grid){
 		int sum = 0; 
