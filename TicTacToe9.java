@@ -1,13 +1,15 @@
 import java.util.Scanner;
-
 /**
- * @author MIROSLAV BERGAM, JEREMY NEWMAN, GRAHAM MATTHEWS, TOM DRZIK
- *
- *
+ * This class contains and implements all methods for two players to play a game of tictactoe.
+ * @author Ethan Chung, Michael Sun, Dillon Shu
+ * @version 7.0
  */
 public class TicTacToe9
 {
-	
+	/**
+	 * Main method that calls upon other methods for players to play tictactoe.
+	 * @param args  String array
+	 */
 	public static void main(String[] args)
 	{
 		Scanner keys = new Scanner(System.in);
@@ -18,30 +20,39 @@ public class TicTacToe9
 		keys.nextLine();
 		String[][] grid = init(size);
 		printGrid(grid);
+		
 		int i = 1;
 		String place;
+		
+		//ask for the users' symbols
+		System.out.println("Enter your symbol, player one: ");
+		String first = keys.nextLine();
+		System.out.println("Enter your symbol, player two: ");
+		String second = keys.nextLine();
+		
 		while((win==false) && (i <= (grid.length * grid.length)))
 		{
 			System.out.println("Where do you want to place your character?");
 			place=keys.nextLine();
-			addSymbol(place, grid, size, i);
+			addSymbol(place, grid, size, i, first, second);
 			i++;
 			win=checkWinner(grid);
 			printGrid(grid);
 		}
-		if (i%2 == 0 && win == true)
+		if (i%2 == 0 && win == true){
 			System.out.println("Congratulations Player 1! You won!");
-		else if (i%2== 1 && win == true)
+		}
+		else if (i%2== 1 && win == true){
 			System.out.println("Congratulations Player 2! You won!");
+		}
 		else
 			System.out.println("YOU TIED!!!");
 	}
 	
-	
 	/**
 	* Initializes an int array that is our board
 	* @param size The size of the length/width of the board
-	* @return Returns the initialized array
+	* @return grid  Returns the initialized array
 	*/
 	public static String[][] init(int size){
 		String[][] grid = new String[size][size];
@@ -57,7 +68,7 @@ public class TicTacToe9
 	
 	/**
 	* Prints the tictactoe board
-	* @param array The array that we will print into a board
+	* @param a  The string array that we will print into a board
 	*/
 	public static void printGrid(String[][] a)
 	{
@@ -76,45 +87,45 @@ public class TicTacToe9
 		System.out.println();
 	}
 	
-	/*
-	 for (int row = 0; row < array.length; row++){
-      System.out.println("–––––");
-      for (int col = 0; col < array[row].length; col++){
-       System.out.print("|");
-       System.out.print(array[row][col] + "\t |");
-      }
-     System.out.println();
-     }
-	}
-	*/
-	
 	/**
 	* Calls upon checkwinner for all directions
-	* @param array The current board
-	* @return Returns if there is a winner
+	* @param array The string array which represents current board
+	* @return win  Returns if there is a winner
 	*/
 	public static boolean checkWinner(String[][] array){
 	 boolean win; 
-	 if (checkDiag(array) == true || checkReverseDiagonal(array) == true || checkVert(array) == true || checkHoriz(array) == true)
+	 if (checkDiag(array) == true || checkReverseDiag(array) == true || checkVert(array) == true || checkHoriz(array) == true){
+	 	//System.out.println("Hello World");
 	 	win = true; 
+	 }
 	 else
 	 	win = false; 
 	 return win; 
 	}
 	
-	public static void addSymbol(String place, String[][]grid, int size, int turn){
+	/**
+	* Adds the users' respective symbol on to the board
+	* @param place  the position on the board
+	* @param grid  the string array which is the tictactoe board 
+	* @param size  the given size of the board
+	* @param turn  the int that represents whose turn it is by taking the mod of turn
+	* @param firstSymbol  the string which is player one's symbol
+	* @param secondSymbol  the string which is player two's symbol
+	*/
+	public static void addSymbol(String place, String[][]grid, int size, int turn, String firstSymbol, String secondSymbol){
 		String symbol;
 		int spot=Integer.parseInt(place);
 		if(turn%2==1){
-			symbol="X";
+			symbol = firstSymbol;
 		}
 		else{
-			symbol="O";
+			symbol = secondSymbol;
 		}
 		grid[(spot-1)/size][(spot-1)%size]=symbol;
 	}
 	
 	/**
+	 * helper function for checkwinner --> checks the diagonal from top left to bottom right
 	 *@param grid the current grid
 	 *@return whether there is a diagonal victory going from (0,0) to (2,2)
 	*/
@@ -128,33 +139,24 @@ public class TicTacToe9
 	}
 	
 	/**
+	 * helper function for checkwinner --> checks the diagonal from top right to bottom left
 	 *@param grid the current grid
 	 *@return whether there is a diagonal victory from (0,2) to (2,0)
 	 *
 	*/
 	public static boolean checkReverseDiag(String[][] grid){
 		int gridLength = grid.length;
-		String firstSymbol = grid[gridLength - 1][gridLength - 1];
-		for (int i = gridLength - 2; i >= 0; i--)
-		{
-			if (!(grid[i][i]).equals(firstSymbol))
-				return false; 
-		}
-		return true; 
-	}
-	
-	public static boolean checkReverseDiagonal(String[][] grid){
-		int gridLength = grid.length;
 		String firstSymbol = grid[0][gridLength - 1];
-		for (int i = gridLength - 2; i >= 0; i--)
+		for (int i = 0; i < grid.length; i++)
 		{
-			if (!(grid[gridLength-i][i]).equals(firstSymbol))
+			if (!(grid[i][grid.length - i - 1]).equals(firstSymbol))
 				return false; 
 		}
 		return true; 
 	}
-	
+
 	/**
+	 * helper function for checkwinner --> checks the possible vertical wins
 	 *@param grid the current grid
 	 *@return whether or not there is a verticle victory
 	*/
@@ -174,7 +176,7 @@ public class TicTacToe9
 	}
 	
 	/**
-	 * This method checks if a player has won in the horizontal row.
+	 * helper function for checkwinner --> checks the possible horizontal wins
 	 * @param grid The String array that holds the current board
 	 * @return Returns true or false, true if a player has won, false if a player has not
 	*/
